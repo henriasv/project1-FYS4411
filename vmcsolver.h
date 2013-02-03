@@ -1,6 +1,9 @@
 #ifndef VMCSOLVER_H
 #define VMCSOLVER_H
 
+#include "trialwavefunction.h"
+#include "hydrogenlike.h"
+
 #include <armadillo>
 
 using namespace arma;
@@ -10,9 +13,28 @@ class VMCSolver
 {
 public:
     VMCSolver();
+    void run();
 
 protected:
-    double waveFunction(const mat &r);
+    double kineticEnergy(const mat &r);
+    double localEnergy(const mat &r);
+
+    TrialWaveFunction* waveFunction;
+
+    int nDimensions;
+    int charge;
+    double stepLength;
+    int nParticles;
+    double h;
+    double h2;
+    long idum;
+
+    vec variationalParameters;
+
+    int nCycles;
+
+    mat rOld;
+    mat rnew;
 };
 
 #endif // VMCSOLVER_H

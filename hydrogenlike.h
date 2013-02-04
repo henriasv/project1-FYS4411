@@ -10,8 +10,8 @@ class HydrogenLike : public TrialWaveFunction
 {
 public:
     HydrogenLike(vec &, int, int);
-    virtual double f(mat &r);
-    virtual double laplacian(mat &r, double h);
+    virtual double f(const mat &r);
+    virtual double laplacian(const mat &r, double h);
 
 protected:
     double alpha;

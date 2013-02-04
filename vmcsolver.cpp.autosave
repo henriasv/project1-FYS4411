@@ -6,20 +6,14 @@ using namespace std;
 
 VMCSolver::VMCSolver()
 {
-    stepLength = 1.0;
-    nParticles = 2;
-    nDimensions = 3;
-    idum = -1;
-    charge = 2;
-    h = 0.001;
-    h2 = 1.0/h/h;
     variationalParameters = zeros(1);
     variationalParameters(0) = 1;
     waveFunction = new HydrogenLike(variationalParameters, nParticles, nDimensions);
 }
 
 void VMCSolver::run()
-{   
+{
+    stepLength = 0.01;
     rOld = zeros<mat>(nParticles, nDimensions);
     rNew = zeros<mat>(nParticles, nDimensions);
 
@@ -33,7 +27,7 @@ void VMCSolver::run()
     }
     rNew = rOld;
 
-    cout << rOld<<"  " << localEnergy(rOld)<< endl;
+    cout << localEnergy(rOld)<< endl;
 }
 
 
@@ -45,7 +39,6 @@ void VMCSolver::run()
 double VMCSolver::localEnergy(const mat &r)
 {
     double kinetic_energy = 0.5*waveFunction->laplacian(r, h)/waveFunction->f(r);
-    cout << "Kinetic energy: " << kinetic_energy << endl;
 
     double potential_energy = 0;
 
@@ -67,7 +60,7 @@ double VMCSolver::localEnergy(const mat &r)
             for (int k = 0; k<nDimensions; k++) {
                 r12 += (r(i,k) - r(j,k))*(r(i,k)-r(j,k));
             }
-            potential_energy += 1.0/sqrt(r12);
+            potential_energy += 1/sqrt(r12);
         }
     }
 

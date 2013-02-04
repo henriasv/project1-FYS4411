@@ -5,7 +5,7 @@ HydrogenLike::HydrogenLike(vec &varparam, int nParticles, int nDimensions) : Tri
     alpha = variationalParameters[0];
 }
 
-double HydrogenLike::f(mat &r)
+double HydrogenLike::f(const mat &r)
 {
     double argument = 0;
     for (int i = 0; i<nParticles; i++) {
@@ -24,7 +24,7 @@ double HydrogenLike::f(mat &r)
  * @param r
  * @return Sum of the laplacians for all the particles.
  */
-double HydrogenLike::laplacian(mat &r, double h)
+double HydrogenLike::laplacian(const mat &r, double h)
 {
 
     mat rPlus = zeros<mat>(nParticles, nDimensions);

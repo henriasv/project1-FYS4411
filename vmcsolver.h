@@ -34,7 +34,7 @@ protected:
     int nCycles;
 
     mat rOld;
-    mat rnew;
+    mat rNew;
 };
 
 #endif // VMCSOLVER_H

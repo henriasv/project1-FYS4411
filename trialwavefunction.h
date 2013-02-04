@@ -8,8 +8,8 @@ class TrialWaveFunction
 {
 public:
     TrialWaveFunction(vec, int, int);
-    virtual double f(mat &r) = 0;
-    virtual double laplacian(mat &r, double h) = 0;
+    virtual double f(const mat &r) = 0;
+    virtual double laplacian(const mat &r, double h) = 0;
 
 protected:
     vec variationalParameters;

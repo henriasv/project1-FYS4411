@@ -3,17 +3,18 @@
 
 #include "trialwavefunction.h"
 #include "hydrogenlike.h"
-
+#include <libconfig.h++>
 #include <armadillo>
 
 using namespace arma;
 using namespace std;
+using namespace libconfig;
 
 class VMCSolver
 {
 public:
-    VMCSolver();
-    void run();
+    VMCSolver(Config &_cfg);
+    void runMCWithMetropolis();
 
 protected:
     double kineticEnergy(const mat &r);

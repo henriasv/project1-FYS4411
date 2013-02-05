@@ -4,7 +4,7 @@
 using namespace arma;
 using namespace std;
 
-VMCSolver::VMCSolver()
+VMCSolver::VMCSolver(Config &_cfg)
 {
     stepLength = 1.0;
     nParticles = 2;
@@ -15,15 +15,14 @@ VMCSolver::VMCSolver()
     h2 = 1.0/h/h;
     variationalParameters = zeros(1);
     variationalParameters(0) = 1;
+    cout << variationalParameters << endl;
     waveFunction = new HydrogenLike(variationalParameters, nParticles, nDimensions);
 }
 
-void VMCSolver::run()
+void VMCSolver::runMCWithMetropolis()
 {   
     rOld = zeros<mat>(nParticles, nDimensions);
     rNew = zeros<mat>(nParticles, nDimensions);
-
-    double deltaE;
 
     // initial trial positions
     for(int i = 0; i < nParticles; i++) {
@@ -62,10 +61,11 @@ double VMCSolver::localEnergy(const mat &r)
     // Electron-electron contribution
     double r12 = 0;
     for (int i = 0; i<nParticles; i++) {
-        for (int j = i+1; i<nParticles; i++) {
+        for (int j = i+1; j<nParticles; j++) {
             r12 = 0;
             for (int k = 0; k<nDimensions; k++) {
                 r12 += (r(i,k) - r(j,k))*(r(i,k)-r(j,k));
+                cout << r12 << endl;
             }
             potential_energy += 1.0/sqrt(r12);
         }

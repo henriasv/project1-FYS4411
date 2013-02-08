@@ -4,9 +4,14 @@
 
 VMCApplication::VMCApplication(string cfgFile)
 {
-    cfg = new Config();
-    cfg->readFile(cfgFile.c_str());
-    solver = new VMCSolver(*cfg);
+    // Try read settings from file
+    try {
+        cfg.readFile(cfgFile.c_str());
+    } catch (const FileIOException &fioex) {
+        cerr << "I/O error while reading config file." << endl;
+        exit(EXIT_FAILURE);
+    }
+    solver = new VMCSolver(cfg);
 }
 
 void VMCApplication::run()

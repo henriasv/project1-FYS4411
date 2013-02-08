@@ -5,6 +5,8 @@
 #include "hydrogenlike.h"
 #include <libconfig.h++>
 #include <armadillo>
+#include "lib.h"
+
 
 using namespace arma;
 using namespace std;
@@ -19,6 +21,13 @@ public:
 protected:
     double kineticEnergy(const mat &r);
     double localEnergy(const mat &r);
+
+    double waveFunctionOld;
+    double waveFunctionNew;
+
+    double deltaE;
+    double energySum;
+    double energySquaredSum;
 
     TrialWaveFunction* waveFunction;
 
@@ -36,6 +45,8 @@ protected:
 
     mat rOld;
     mat rNew;
+
+    Config* cfg;
 };
 
 #endif // VMCSOLVER_H

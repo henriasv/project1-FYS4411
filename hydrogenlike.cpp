@@ -2,7 +2,7 @@
 
 HydrogenLike::HydrogenLike(vec &varparam, int nParticles, int nDimensions) : TrialWaveFunction(varparam, nParticles, nDimensions)
 {
-    alpha = variationalParameters[0];
+    alpha = variationalParameters(0);
 }
 
 double HydrogenLike::f(const mat &r)

@@ -12,7 +12,7 @@ public:
 
 protected:
     VMCSolver* solver;
-    Config* cfg;
+    Config cfg;
 };
 
 #endif // VMCAPPLICATION_H

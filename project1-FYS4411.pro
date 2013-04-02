@@ -22,3 +22,6 @@ unix|win32: LIBS += -larmadillo
 
 unix: CONFIG += link_pkgconfig
 unix: PKGCONFIG += libconfig++
+
+OTHER_FILES += \
+    std_config_4411.cfg
